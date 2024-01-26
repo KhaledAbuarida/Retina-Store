@@ -20,7 +20,7 @@ const AppHeader = () => {
     
     return (
     <AppBar position="static" sx={{ backgroundColor: "#1D2B53"}}>
-      <Container maxWidth="xl">
+      <Container>
         <Toolbar disableGutters>
             <StorefrontIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
             <Typography
