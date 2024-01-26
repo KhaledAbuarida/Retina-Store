@@ -7,9 +7,13 @@ import { Product } from '../utils/AppData';
 
 interface Props {
   product: Product;
+  handleAddToCart: (product: Product) => void;
 }
 
-export const ProductCard = ({product}: Props) => {
+export const ProductCard = ({product, handleAddToCart}: Props) => {
+
+
+
   return (
     <Card sx={{ width: 320 }}>
       <Typography level="title-lg">{product.name}</Typography>
@@ -35,6 +39,7 @@ export const ProductCard = ({product}: Props) => {
           color="primary"
           aria-label="Add To Cart"
           sx={{ ml: 'auto', alignSelf: 'center', fontWeight: 600 }}
+          onClick={() => handleAddToCart(product) }
         >
           Add To Cart
         </Button>

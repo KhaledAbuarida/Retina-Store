@@ -18,3 +18,4 @@ export const productsList:Product[] = [
     {id: 7, name: 'cardoO watch', price: 60399, image: 'https://m.media-amazon.com/images/I/61YVAmm96CL._AC_UL320_.jpg', category: 'smart watch' },
     {id: 8, name: 'joyroom pro', price: 70099, image: 'https://m.media-amazon.com/images/I/61dEMVpJpJL._AC_SL1500_.jpg', category: 'smart watch' },
 ]
+
