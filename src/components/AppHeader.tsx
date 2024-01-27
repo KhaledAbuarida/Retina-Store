@@ -107,11 +107,11 @@ const AppHeader = () => {
                 ))}
             </Box>
 
-            <IconButton color="inherit" href="/cart">
+            <IconButton color="inherit">
                 <ShoppingCartIcon />
             </IconButton>
 
-            <p> user Name </p>
+            <p> User Name </p>
 
           
         </Toolbar>

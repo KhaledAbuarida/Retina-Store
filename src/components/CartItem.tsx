@@ -16,7 +16,6 @@ export const CartItem = ({CartItem}: Props) => {
       <CardContent>
         <Typography variant="h5" component="div">
           {CartItem.name}
-          product name
         </Typography>
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
           {CartItem.category}

@@ -1,17 +1,13 @@
 import { Container } from "@mui/material"
 import { ProductCard } from "./ProductCard"
-import { Product, productsList } from "../utils/AppData"
+import { productsList } from "../utils/AppData"
 
-interface Props {
-  onAddToCart: (product:Product) => void;
-}
-
-export const ProductList = ({onAddToCart}: Props) => {
+export const ProductList = () => {
   return (
     <Container sx={{padding: "20px", display: 'flex', flexWrap: 'wrap', gap: 4}}>
       
       {productsList.map(product => (
-        <ProductCard product={product} handleAddToCart={(product) => onAddToCart(product)} />
+        <ProductCard key={product.id} product={product}/>
       ))}
     </Container>
         

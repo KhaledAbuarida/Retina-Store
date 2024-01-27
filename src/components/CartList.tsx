@@ -1,17 +1,17 @@
 import { Container } from "@mui/material"
-import { Product } from "../utils/AppData"
 import { CartItem } from "./CartItem"
+import { useContext } from "react"
+import { CartContext } from "../contexts/cart.context"
 
-interface Props {
-    items: Product[]
-}
+export const CartList = () => {
 
-export const CartList = ({items}: Props) => {
+  const cartItems = useContext(CartContext);
+
   return (
     <Container>
         hello its work
-        {items.map(item => (
-            <CartItem CartItem={item} />
+        {cartItems?.cartItems.map(item => (
+            <CartItem key={item.id} CartItem={item} />
         ))}
     </Container>
   )
