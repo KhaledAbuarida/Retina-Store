@@ -46,7 +46,7 @@ const AppHeader = () => {
                     </Button>
                 </NavLink>
                 <NavLink
-                    to='/'
+                    to='/add'
                     style={{
                         textDecoration: 'none',
                         color: '#FFF',

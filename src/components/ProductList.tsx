@@ -4,7 +4,7 @@ import { productsList } from "../utils/AppData"
 
 export const ProductList = () => {
   return (
-    <Container sx={{padding: "20px", display: 'flex', flexWrap: 'wrap', gap: 4}}>
+    <Container , display: 'flex', flexWrap: 'wrap', gap: 4}}>
       
       {productsList.map(product => (
         <ProductCard key={product.id} product={product}/>

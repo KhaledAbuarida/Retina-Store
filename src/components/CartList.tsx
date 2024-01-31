@@ -8,10 +8,10 @@ export const CartList = () => {
 	const cartItems = useContext(CartContext);
 
 	return (
-		<Container>
-			<h2 style={{margin: '20px'}}>Total Price: ${cartItems?.totalPrice}</h2>
+		<Container sx={{padding: "20px"}}>
+			<h2>Total Price: ${cartItems?.totalPrice}</h2>
 			{cartItems?.cartItems.map(item => (
-				<Box margin={2} key={item.id}>
+				<Box marginTop={2} key={item.id}>
 					<CartItem CartItem={item} />
 				</Box>
 			))}
