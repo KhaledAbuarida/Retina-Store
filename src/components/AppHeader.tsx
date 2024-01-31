@@ -3,6 +3,8 @@ import {useState} from "react";
 import StorefrontIcon from '@mui/icons-material/Storefront';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import MenuIcon from '@mui/icons-material/Menu';
+import { NavLink } from "react-router-dom";
+
 
 const pages = ['Products', 'Pricing'];
 
@@ -23,23 +25,24 @@ const AppHeader = () => {
       <Container>
         <Toolbar disableGutters>
             <StorefrontIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-            <Typography
-                variant="h6"
-                noWrap
-                component="a"
-                href="/"
-                sx={{
-                mr: 2,
-                display: { xs: 'none', md: 'flex' },
-                fontFamily: 'monospace',
-                fontWeight: 700,
-                letterSpacing: '.3rem',
-                color: 'inherit',
-                textDecoration: 'none',
-                }}
-            >
-                Retina
-            </Typography>
+            <NavLink to='/' style={{textDecoration: 'none'}}>
+                <Typography
+                    variant="h6"
+                    noWrap
+                    component="a"
+                    sx={{
+                    mr: 2,
+                    display: { xs: 'none', md: 'flex' },
+                    fontFamily: 'monospace',
+                    fontWeight: 700,
+                    letterSpacing: '.3rem',
+                    color: '#fff',
+                    textDecoration: 'none',
+                    }}
+                >
+                    Retina
+                </Typography>
+            </NavLink>
 
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
                 <IconButton
@@ -51,7 +54,7 @@ const AppHeader = () => {
                 color="inherit"
                 >
                 <MenuIcon />
-                </IconButton>
+                    </IconButton>
                 <Menu
                 id="menu-appbar"
                 anchorEl={anchorElNav}
@@ -77,25 +80,26 @@ const AppHeader = () => {
                 ))}
                 </Menu>
             </Box>
-            <Typography
-                variant="h5"
-                noWrap
-                component="a"
-                href="#app-bar-with-responsive-menu"
-                sx={{
-                mr: 2,
-                display: { xs: 'flex', md: 'none' },
-                flexGrow: 1,
-                fontFamily: 'monospace',
-                fontWeight: 700,
-                letterSpacing: '.3rem',
-                color: 'inherit',
-                textDecoration: 'none',
-                }}
-            >
-                Retina
-            </Typography>
-            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            <NavLink to='/' style={{ textDecoration: 'none'}}>
+                <Typography
+                    variant="h5"
+                    noWrap
+                    component="a"
+                    sx={{
+                    mr: 2,
+                    display: { xs: 'flex', md: 'none' },
+                    flexGrow: 1,
+                    fontFamily: 'monospace',
+                    fontWeight: 700,
+                    letterSpacing: '.3rem',
+                    color: '#fff',
+                    textDecoration: 'none',
+                    }}
+                >
+                    Retina
+                </Typography>
+            </NavLink>
+                        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
                 {pages.map((page) => (
                 <Button
                     key={page}
@@ -107,9 +111,10 @@ const AppHeader = () => {
                 ))}
             </Box>
 
-            <IconButton color="inherit">
+            <NavLink to='/cart' style={{color: 'white', marginRight: '20px'}}>
                 <ShoppingCartIcon />
-            </IconButton>
+            </NavLink>
+           
 
             <p> User Name </p>
 

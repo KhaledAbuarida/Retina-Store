@@ -1,7 +1,8 @@
 import AppHeader from './components/AppHeader'
 import { ProductList } from './components/ProductList'
 import { CartList } from './components/CartList';
-import { CartContextProvider } from './contexts/cart.context';
+import { CartContextProvider } from './contexts/Cart.context';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 function App() {
 
@@ -9,11 +10,15 @@ function App() {
 
 
   return (
-    <CartContextProvider>
-      <AppHeader/>
-      <ProductList />
-      <CartList />
-    </CartContextProvider>
+    <BrowserRouter>
+      <CartContextProvider>
+        <AppHeader/>
+        <Routes>
+          <Route index element={<ProductList />}/>
+          <Route path='/cart' element={<CartList />}/>
+        </Routes>
+      </CartContextProvider>  
+    </BrowserRouter>
   )
 }
 

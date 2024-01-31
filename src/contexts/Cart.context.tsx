@@ -13,7 +13,9 @@ interface CartContextProviderProps {
 }
 
 export const CartContextProvider: React.FC<CartContextProviderProps> = ({ children }) => {
-  const [cartItems, setCartItems] = useState<Product[]>([]);
+  const [cartItems, setCartItems] = useState<Product[]>([{id: 1, name: 'Lenovo G3', price: 20999, image: 'https://m.media-amazon.com/images/I/516F3sfYp4L.__AC_SY300_SX300_QL70_ML2_.jpg',category: 'laptop', quantity: 1},]);
+  
+
 
   const addToCart = (item: Product) => {
     setCartItems((prevItems) => [...prevItems, item]);

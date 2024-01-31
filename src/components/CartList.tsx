@@ -1,7 +1,7 @@
-import { Container } from "@mui/material"
+import { Box, Container, Stack } from "@mui/material"
 import { CartItem } from "./CartItem"
 import { useContext } from "react"
-import { CartContext } from "../contexts/cart.context"
+import { CartContext } from "../contexts/Cart.context"
 
 export const CartList = () => {
 
@@ -9,9 +9,10 @@ export const CartList = () => {
 
   return (
     <Container>
-        hello its work
         {cartItems?.cartItems.map(item => (
+          <Box margin={2}>
             <CartItem key={item.id} CartItem={item} />
+          </Box>
         ))}
     </Container>
   )

@@ -4,8 +4,8 @@ import Card from '@mui/joy/Card';
 import CardContent from '@mui/joy/CardContent';
 import Typography from '@mui/joy/Typography';
 import { Product } from '../utils/AppData';
-import { CartContext } from '../contexts/cart.context';
 import { useContext } from 'react';
+import { CartContext } from '../contexts/Cart.context';
 
 interface Props {
   product: Product;
