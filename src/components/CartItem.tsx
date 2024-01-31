@@ -37,7 +37,7 @@ export const CartItem = ({CartItem}: Props) => {
 
 			CartItem.quantity = itemQuantity - 1;
 
-			cartItems?.handleTotalPrice(CartItem.price);
+			cartItems?.handleTotalPrice(-CartItem.price);
 
 			// Calculate the new itemPrice using the updated itemQuantity
 			setItemPrice(CartItem.price * (itemQuantity - 1));
@@ -50,7 +50,7 @@ export const CartItem = ({CartItem}: Props) => {
 			<CardContent>
 				<div>
 					<Typography variant="h5" component="div">
-						{CartItem.name}
+						<b>{CartItem.name}</b>
 					</Typography>
 	
 					<Typography sx={{ mb: 1.5 }} color="text.secondary">
