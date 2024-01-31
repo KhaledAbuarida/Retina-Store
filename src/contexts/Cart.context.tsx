@@ -1,9 +1,10 @@
 import React, { createContext, useState, ReactNode } from "react";
-import { Product } from "../utils/AppData";
+import { ICartItem } from "../utils/AppData";
 
 interface CartContextType {
-  cartItems: Product[];
-  addToCart: (item: Product) => void;
+  cartItems: ICartItem[];
+  addToCart: (item: ICartItem) => void;
+  deleteCartItem: (id: number) => void;
 }
 
 export const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -13,17 +14,27 @@ interface CartContextProviderProps {
 }
 
 export const CartContextProvider: React.FC<CartContextProviderProps> = ({ children }) => {
-  const [cartItems, setCartItems] = useState<Product[]>([{id: 1, name: 'Lenovo G3', price: 20999, image: 'https://m.media-amazon.com/images/I/516F3sfYp4L.__AC_SY300_SX300_QL70_ML2_.jpg',category: 'laptop', quantity: 1},]);
+  const [cartItems, setCartItems] = useState<ICartItem[]>([]);
   
 
 
-  const addToCart = (item: Product) => {
-    setCartItems((prevItems) => [...prevItems, item]);
+  const addToCart = (item: ICartItem) => {
+
+    const isCartItemExist = cartItems.find((cartItem) => cartItem.id === item.id);
+    
+    if(!isCartItemExist){
+      setCartItems((prevItems) => [...prevItems, item]);
+    }
   };
+
+  const deleteCartItem = (id: number) => {
+    setCartItems(cartItems.filter((item) => item.id !== id));
+  }
 
   const contextValue: CartContextType = {
     cartItems,
     addToCart,
+    deleteCartItem
   };
 
   return (

@@ -1,4 +1,4 @@
-import { Box, Container, Stack } from "@mui/material"
+import { Box, Container } from "@mui/material"
 import { CartItem } from "./CartItem"
 import { useContext } from "react"
 import { CartContext } from "../contexts/Cart.context"

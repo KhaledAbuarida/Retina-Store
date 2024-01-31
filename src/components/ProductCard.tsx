@@ -3,12 +3,12 @@ import Button from '@mui/joy/Button';
 import Card from '@mui/joy/Card';
 import CardContent from '@mui/joy/CardContent';
 import Typography from '@mui/joy/Typography';
-import { Product } from '../utils/AppData';
+import { IProduct } from '../utils/AppData';
 import { useContext } from 'react';
 import { CartContext } from '../contexts/Cart.context';
 
 interface Props {
-  product: Product;
+  product: IProduct;
 }
 
 export const ProductCard = ({product}: Props) => {
@@ -40,7 +40,7 @@ export const ProductCard = ({product}: Props) => {
           color="primary"
           aria-label="Add To Cart"
           sx={{ ml: 'auto', alignSelf: 'center', fontWeight: 600 }}
-          onClick={() => Cart?.addToCart(product) }
+          onClick={() => Cart?.addToCart({...product, quantity: 1}) }
         >
           Add To Cart
         </Button>
