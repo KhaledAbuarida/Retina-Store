@@ -5,15 +5,16 @@ import { CartContext } from "../contexts/Cart.context"
 
 export const CartList = () => {
 
-  const cartItems = useContext(CartContext);
+	const cartItems = useContext(CartContext);
 
-  return (
-    <Container>
-        {cartItems?.cartItems.map(item => (
-          <Box margin={2}>
-            <CartItem key={item.id} CartItem={item} />
-          </Box>
-        ))}
-    </Container>
-  )
+	return (
+		<Container>
+			<h2 style={{margin: '20px'}}>Total Price: ${cartItems?.totalPrice}</h2>
+			{cartItems?.cartItems.map(item => (
+				<Box margin={2} key={item.id}>
+					<CartItem CartItem={item} />
+				</Box>
+			))}
+		</Container>
+	)
 }
