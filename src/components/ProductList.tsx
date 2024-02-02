@@ -1,8 +1,12 @@
 import { Container } from "@mui/material"
 import { ProductCard } from "./ProductCard"
-import { productsList } from "../utils/AppData"
+import { IProduct } from "../utils/AppData"
 
-export const ProductList = () => {
+interface Props {
+  productsList: IProduct[]
+}
+
+export const ProductList = ({productsList}: Props) => {
   return (
     <Container sx={{ paddingTop: '20px', display: 'flex', flexWrap: 'wrap', gap: 4}}>
       
