@@ -24,7 +24,7 @@ export const CartItem = ({CartItem}: Props) => {
 		  	// Increase itemQuantity first
 			setItemQuantity((prevQuantity) => prevQuantity + 1);
 			CartItem.quantity = itemQuantity + 1;
-			cartItems?.handleTotalPrice(CartItem.price);
+			cartItems?.handleTotalPrice(parseInt(CartItem.price));
 		  	// Calculate the new itemPrice using the updated itemQuantity
 		  	setItemPrice(CartItem.price * (itemQuantity + 1));
 		}

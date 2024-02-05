@@ -44,6 +44,7 @@ export const CartContextProvider: React.FC<CartContextProviderProps> = ({ childr
 	// SET TOTAL PRICE
 	const handleTotalPrice = (price: number) => {
 		setTotalPrice((prevPrice) => prevPrice + price)
+		console.log(typeof(price))
 	}
 
 	const contextValue: CartContextType = {
