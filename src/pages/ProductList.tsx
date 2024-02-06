@@ -1,5 +1,5 @@
 import { Container } from "@mui/material"
-import { ProductCard } from "./ProductCard"
+import { ProductCard } from "../components/ProductCard"
 import { IProduct } from "../utils/AppData"
 
 interface Props {

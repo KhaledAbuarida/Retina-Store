@@ -1,7 +1,8 @@
-import { Box, Button, Container, Stack, Typography } from "@mui/material"
-import { CartItem } from "./CartItem"
+import { Box, Button, Container, Typography } from "@mui/material"
+import { CartItem } from "../components/CartItem"
 import { useContext } from "react"
 import { CartContext } from "../contexts/Cart.context"
+import { NavLink } from "react-router-dom"
 
 export const CartList = () => {
 
@@ -27,12 +28,14 @@ export const CartList = () => {
 				</Box>
 			))}
 
-			<Button 
-					variant="contained"
-					sx={{marginTop: '10px', textTransform: 'none'}}
-				>
-					Order Now
+			<NavLink to='/checkout'>
+				<Button 
+						variant="contained"
+						sx={{marginTop: '10px', textTransform: 'none'}}
+					>
+						Order Now
 				</Button>
+			</NavLink>
 		</Container>
 	)
 }
