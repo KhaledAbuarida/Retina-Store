@@ -12,6 +12,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
+import { Paypal } from "../components/Paypal";
 
 export const Checkout = () => {
   const [value, setValue] = useState("COD");
@@ -20,46 +21,54 @@ export const Checkout = () => {
     setValue((event.target as HTMLInputElement).value);
   };
 
-  const handleCheckout = () => {};
+  const handleCheckout = () => {
+    console.log("clicked");
+  };
 
   return (
     <Container>
       <Grid container spacing={2}>
         <Grid item xs={6}>
-          <Container sx={{ paddingTop: "20%" }}>
-            <Typography variant="h5" gutterBottom>
-              Payment Method
-            </Typography>
-            <FormControl sx={{ marginTop: "10%", display: "block" }}>
-              <FormLabel id="demo-controlled-radio-buttons-group">
-                Method
-              </FormLabel>
-              <RadioGroup
-                aria-labelledby="demo-controlled-radio-buttons-group"
-                name="controlled-radio-buttons-group"
-                value={value}
-                onChange={handleChange}
+          {value === "Paypal" ? (
+            <Container sx={{ paddingTop: "20%" }}>
+              <Paypal />
+            </Container>
+          ) : (
+            <Container sx={{ paddingTop: "20%" }}>
+              <Typography variant="h5" gutterBottom>
+                Payment Method
+              </Typography>
+              <FormControl sx={{ marginTop: "10%", display: "block" }}>
+                <FormLabel id="demo-controlled-radio-buttons-group">
+                  Method
+                </FormLabel>
+                <RadioGroup
+                  aria-labelledby="demo-controlled-radio-buttons-group"
+                  name="controlled-radio-buttons-group"
+                  value={value}
+                  onChange={handleChange}
+                >
+                  <FormControlLabel
+                    value="Paypal"
+                    control={<Radio />}
+                    label="Paypal"
+                  />
+                  <FormControlLabel
+                    value="COD"
+                    control={<Radio />}
+                    label="Cash on delivery"
+                  />
+                </RadioGroup>
+              </FormControl>
+              <Button
+                variant="contained"
+                sx={{ marginTop: "20%", width: "100%", textTransform: "none" }}
+                onClick={handleCheckout}
               >
-                <FormControlLabel
-                  value="Paypal"
-                  control={<Radio />}
-                  label="Paypal"
-                />
-                <FormControlLabel
-                  value="COD"
-                  control={<Radio />}
-                  label="Cash on delivery"
-                />
-              </RadioGroup>
-            </FormControl>
-            <Button
-              variant="contained"
-              sx={{ marginTop: "20%", width: "100%", textTransform: "none" }}
-              onClick={handleCheckout}
-            >
-              Checkout
-            </Button>
-          </Container>
+                Checkout
+              </Button>
+            </Container>
+          )}
         </Grid>
         <Grid item xs={6}>
           <Container sx={{ padding: "20% 0" }}>

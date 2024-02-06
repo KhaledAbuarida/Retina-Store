@@ -9,8 +9,9 @@ export const Paypal: React.FC = () => {
 
   useEffect(() => {
     // CREATE ORDER WITH PAYPAL
-    const createOrder = (data: any, actions: any, error: any): any => {
+    const createOrder = (data: any, actions: any): any => {
       return actions.order.create({
+        intent: "CAPTURE",
         purchase_units: [
           {
             amount: {
@@ -23,10 +24,18 @@ export const Paypal: React.FC = () => {
     };
 
     // ON APPROVE
-    const onApprove = (data: any, actions: any): any => {
-      return actions.order.capture().then(function (details: any) {
-        // Handle the captured payment
-        console.log(details);
+    const onApprove = async (data: any, actions: any) => {
+      return await actions.order.capture()
+        .then((details: any) => {
+          fetch("/api/paypal-order-capture", {
+            method: "POST",
+            body: JSON.stringify(details),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+            .then((response) => response.json())
+            .then((data) => console.log(data));
       });
     };
 
