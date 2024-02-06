@@ -16,20 +16,25 @@ import { Paypal } from "../components/Paypal";
 
 export const Checkout = () => {
   const [value, setValue] = useState("COD");
+  const [checkoutWithPaypal, setCheckoutWithPaypal] = useState(false);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue((event.target as HTMLInputElement).value);
   };
 
   const handleCheckout = () => {
-    console.log("clicked");
+    if (value === "Paypal") {
+      setCheckoutWithPaypal(true);
+    } else {
+      setCheckoutWithPaypal(false);
+    }
   };
 
   return (
     <Container>
       <Grid container spacing={2}>
         <Grid item xs={6}>
-          {value === "Paypal" ? (
+          {checkoutWithPaypal ? (
             <Container sx={{ paddingTop: "20%" }}>
               <Paypal />
             </Container>

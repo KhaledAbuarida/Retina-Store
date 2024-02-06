@@ -25,18 +25,20 @@ export const Paypal: React.FC = () => {
 
     // ON APPROVE
     const onApprove = async (data: any, actions: any) => {
-      return await actions.order.capture()
-        .then((details: any) => {
-          fetch("/api/paypal-order-capture", {
-            method: "POST",
-            body: JSON.stringify(details),
-            headers: {
-              "Content-Type": "application/json",
-            },
-          })
-            .then((response) => response.json())
-            .then((data) => console.log(data));
+      return await actions.order.capture().then((details: any) => {
+        fetch("/api/paypal-order-capture", {
+          method: "POST",
+          body: JSON.stringify(details),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => response.json())
+          .then((data) => console.log(data));
       });
+    };
+    const onError = (err: any) => {
+      console.log(err);
     };
 
     // Type assertion to inform TypeScript about the existence of the 'paypal' property
@@ -47,14 +49,10 @@ export const Paypal: React.FC = () => {
         .Buttons({
           createOrder,
           onApprove,
+          onError,
         })
         .render(paypal.current);
     }
-
-    // Cleanup function
-    return () => {
-      // Perform any cleanup here if needed
-    };
   }, []);
 
   return (
