@@ -1,5 +1,6 @@
 
 export interface IProduct {
+    _id?: number
     name: string
     price: number
     image: string
@@ -8,7 +9,7 @@ export interface IProduct {
 }
 
 export interface ICartItem {
-    id: number
+    _id?: number
     name: string
     price: number
     image: string

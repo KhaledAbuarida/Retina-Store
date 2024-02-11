@@ -70,7 +70,6 @@ export const Checkout = () => {
   useEffect(() => {
     if (success) {
       alert("Payment successful!!");
-      console.log("Order successful . Your order id is--", orderID);
     }
   }, [success]);
 

@@ -35,7 +35,13 @@ export const ProductCard = ({ product }: Props) => {
           color="primary"
           aria-label="Add To Cart"
           sx={{ ml: "auto", alignSelf: "center", fontWeight: 600 }}
-          onClick={() => Cart?.addToCart({ ...product, quantity: 1 })}
+          onClick={() =>
+            Cart?.addToCart({
+              ...product,
+              quantity: 1,
+              _id: product._id,
+            })
+          }
         >
           Add To Cart
         </Button>
