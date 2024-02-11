@@ -3,7 +3,7 @@ import { ProductList } from "./pages/ProductList";
 import { CartList } from "./pages/CartList";
 import { CartContextProvider } from "./contexts/Cart.context";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { AddProduct } from "./pages/AddProduct";
+import AddProduct from "./pages/AddProduct";
 import { IProduct } from "./utils/AppData";
 import { useEffect, useState } from "react";
 import { Checkout } from "./pages/Checkout";
