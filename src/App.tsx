@@ -4,13 +4,24 @@ import { CartList } from "./pages/CartList";
 import { CartContextProvider } from "./contexts/Cart.context";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AddProduct } from "./pages/AddProduct";
-import { IProduct, productsList } from "./utils/AppData";
-import { useState } from "react";
+import { IProduct } from "./utils/AppData";
+import { useEffect, useState } from "react";
 import { Checkout } from "./pages/Checkout";
+
+export const BaseUrl = "http://localhost:3001";
 
 function App() {
   // States
-  const [products, setProducts] = useState<IProduct[]>(productsList);
+  const [products, setProducts] = useState<IProduct[]>([]);
+
+  const getProducts = async () => {
+    const data = await fetch(`${BaseUrl}/products`).then((res) => res.json());
+    setProducts(data);
+  };
+
+  useEffect(() => {
+    getProducts();
+  }, [products]);
 
   return (
     <BrowserRouter>
@@ -24,7 +35,7 @@ function App() {
             element={
               <AddProduct products={products} setProducts={setProducts} />
             }
-          />  
+          />
           <Route path="/Checkout" element={<Checkout />} />
         </Routes>
       </CartContextProvider>

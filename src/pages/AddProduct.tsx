@@ -1,22 +1,22 @@
 import { Button, Container, TextField } from "@mui/material";
 import { IProduct } from "../utils/AppData";
 import { ChangeEvent, Dispatch, useState } from "react";
-import { addNewProduct } from "../api/productApi";
+import { BaseUrl } from "../App";
+import { error } from "console";
+
+let initialState = {
+  name: "",
+  image: "",
+  price: 0,
+  category: "",
+  stock: 0,
+};
 
 interface Props {
   products: IProduct[];
-  setProducts: Dispatch<React.SetStateAction<IProduct[]>>;
+  setProducts: Dispatch<React.SetStateAction<IProduct[] | any[]>>;
 }
 export const AddProduct = ({ products, setProducts }: Props) => {
-  let initialState = {
-    id: new Date().getTime(),
-    name: "",
-    category: "",
-    price: 0,
-    stock: 0,
-    image: "",
-  };
-
   const [formData, setFormData] = useState<IProduct>(initialState);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -24,10 +24,24 @@ export const AddProduct = ({ products, setProducts }: Props) => {
   };
 
   const handleSubmitForm = async () => {
-    const res = await addNewProduct(formData);
-    console.log(res);
-    // setProducts([...products, formData]);
-    setFormData(initialState);
+    try {
+      const response = await fetch(`${BaseUrl}/products/new`, {
+        method: "POST",
+        body: JSON.stringify(formData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error(`Http error! Status: ${response.status}`);
+      }
+
+      const data = response.json();
+      setProducts([...products, data]);
+    } catch (err) {
+      console.error("Error:", err);
+    }
   };
 
   return (
