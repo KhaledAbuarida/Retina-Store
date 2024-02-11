@@ -8,8 +8,10 @@ export interface IProduct {
 }
 
 export interface ICartItem {
+    id: number
     name: string
     price: number
+    image: string
     category: string
     quantity: number
     stock: number
