@@ -8,6 +8,7 @@ import { IProduct } from "./utils/AppData";
 import { useEffect, useState } from "react";
 import { Checkout } from "./pages/Checkout";
 
+
 export const BaseUrl = "http://localhost:3001";
 
 function App() {
@@ -30,12 +31,7 @@ function App() {
         <Routes>
           <Route index element={<ProductList productsList={products} />} />
           <Route path="/cart" element={<CartList />} />
-          <Route
-            path="/add"
-            element={
-              <AddProduct products={products} setProducts={setProducts} />
-            }
-          />
+          <Route path="/add" element={<AddProduct />} />
           <Route path="/Checkout" element={<Checkout />} />
         </Routes>
       </CartContextProvider>

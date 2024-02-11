@@ -1,18 +1,13 @@
 import { Button, Container, TextField, Typography } from "@mui/material";
-import { IProduct } from "../utils/AppData";
-import { Dispatch } from "react";
 import { BaseUrl } from "../App";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useNavigate } from "react-router";
 
-// interfaces
-interface Props {
-  products: IProduct[];
-  setProducts: Dispatch<React.SetStateAction<IProduct[] | any[]>>;
-}
+const AddProduct = () => {
+  const navigate = useNavigate();
 
-const AddProduct = ({ products, setProducts }: Props) => {
   // form validation schema
   const validationSchema = yup.object().shape({
     name: yup.string().required("Product Name is Required"),
@@ -56,8 +51,8 @@ const AddProduct = ({ products, setProducts }: Props) => {
         throw new Error(`Http error! Status: ${response.status}`);
       }
       const newProduct = response.json();
-      setProducts([...products, newProduct]);
       reset();
+      navigate("/");
     } catch (err) {
       console.error("Error:", err);
     }
