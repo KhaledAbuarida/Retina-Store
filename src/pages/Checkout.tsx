@@ -21,11 +21,13 @@ export const Checkout = () => {
   const { register, handleSubmit } = useForm();
 
   const onSubmit = (data: any) => {
-    data.radioGroup === "Paypal" ? setShow(true) : setShow(false);
+    setShow(data.radioGroup === "Paypal");
+    console.log(show);
   };
 
   const initialOptions = {
-    clientId: "AZj5zoXTTclUtjJTy7j66coRlH5PcSa0K54ufQ5OzchXP3-y0pSGeNwvNcBnids3JcsnufgTK0tCL8H3",
+    clientId:
+      "AZj5zoXTTclUtjJTy7j66coRlH5PcSa0K54ufQ5OzchXP3-y0pSGeNwvNcBnids3JcsnufgTK0tCL8H3",
     currency: "USD",
     intent: "capture",
   };

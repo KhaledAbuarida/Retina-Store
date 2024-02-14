@@ -8,6 +8,7 @@ export interface IProduct {
     stock: number
 }
 
+
 export interface ICartItem {
     _id?: number
     name: string

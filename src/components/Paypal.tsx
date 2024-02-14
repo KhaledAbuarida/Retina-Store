@@ -1,24 +1,41 @@
 import { PayPalButtons } from "@paypal/react-paypal-js";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { CartContext } from "../contexts/Cart.context";
 
 export const Paypal = () => {
-  const [orderID, setOrderID] = useState(false);
-  const [success, setSuccess] = useState(false);
+  const [orderID, setOrderID] = useState<string | null>(null);
+  const [success, setSuccess] = useState<boolean>(false);
+  const cartItems = useContext(CartContext);
 
   const createOrder = (data: any, actions: any) => {
     return actions.order
       .create({
         purchase_units: [
           {
-            description: "toy",
+            reference_id: "PU1",
             amount: {
               currency_code: "USD",
-              value: "60.00",
+              value: cartItems?.totalPrice.toFixed(2).toString(),
+              breakdown: {
+                item_total: {
+                  currency_code: "USD",
+                  value: cartItems?.totalPrice.toFixed(2).toString(),
+                },
+              },
             },
+            items: cartItems?.cartItems.map((item) => ({
+              name: item.name,
+              description: item.name,
+              unit_amount: {
+                currency_code: "USD",
+                value: item.price.toFixed().toString(),
+              },
+              quantity: item.quantity.toString(),
+            })),
           },
         ],
       })
-      .then((orderID: boolean) => {
+      .then((orderID: any) => {
         setOrderID(orderID);
         return orderID;
       });
