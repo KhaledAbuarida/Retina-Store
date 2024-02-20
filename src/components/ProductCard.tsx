@@ -3,17 +3,26 @@ import Button from "@mui/joy/Button";
 import Card from "@mui/joy/Card";
 import CardContent from "@mui/joy/CardContent";
 import Typography from "@mui/joy/Typography";
-import { IProduct } from "../utils/AppData";
-import { useContext } from "react";
-import { CartContext } from "../contexts/Cart.context";
+import { ICartItem, IProduct } from "../utils/AppData";
 
 interface Props {
   product: IProduct;
+  setCartItems: React.Dispatch<React.SetStateAction<ICartItem[]>>;
+  cartItems: ICartItem[];
 }
 
-export const ProductCard = ({ product }: Props) => {
-  const Cart = useContext(CartContext);
-
+export const ProductCard = ({ product, setCartItems, cartItems }: Props) => {
+  // handle add to cart
+  const handleAddCartItem = () => {
+    const cartItem: ICartItem = {
+      productId: product.productId,
+      productName: product.name,
+      imageUrl: product.image,
+      unitPrice: product.price,
+      quantity: 1,
+    };
+    setCartItems([...cartItems, cartItem]);
+  };
   return (
     <Card sx={{ width: 320 }}>
       <Typography level="title-lg">{product.name}</Typography>
@@ -35,13 +44,7 @@ export const ProductCard = ({ product }: Props) => {
           color="primary"
           aria-label="Add To Cart"
           sx={{ ml: "auto", alignSelf: "center", fontWeight: 600 }}
-          onClick={() =>
-            Cart?.addToCart({
-              ...product,
-              quantity: 1,
-              _id: product._id,
-            })
-          }
+          onClick={() => handleAddCartItem()}
         >
           Add To Cart
         </Button>

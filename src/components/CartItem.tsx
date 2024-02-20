@@ -11,12 +11,14 @@ import { AspectRatio } from "@mui/joy";
 import { deleteCartItem } from "../api/cart.api";
 
 interface Props {
-  CartItem: ICartItem;
+  cartItem: ICartItem;
+  cartItems: ICartItem[];
+  setCartItems: React.Dispatch<React.SetStateAction<ICartItem[]>>;
 }
 
-export const CartItem = ({ CartItem }: Props) => {
-  const [itemQuantity, setItemQuantity] = useState(CartItem.quantity);
-  const [itemPrice, setItemPrice] = useState(itemQuantity * CartItem.unitPrice);
+export const CartItem = ({ cartItem, cartItems, setCartItems }: Props) => {
+  const [itemQuantity, setItemQuantity] = useState(cartItem.quantity);
+  const [itemPrice, setItemPrice] = useState(itemQuantity * cartItem.unitPrice);
 
   // const handleIncreaseItemQuantity = () => {
   //   if (itemQuantity < CartItem.stock) {
@@ -46,6 +48,7 @@ export const CartItem = ({ CartItem }: Props) => {
 
   // handle delete cart item
   const handleDeleteCartItem = async (productId: string) => {
+    setCartItems(cartItems.filter((item) => item.productId !== productId));
     await deleteCartItem(productId);
   };
 
@@ -55,7 +58,7 @@ export const CartItem = ({ CartItem }: Props) => {
         <Grid container>
           <Grid item xs={9}>
             <Typography variant="h5" component="div">
-              <b>{CartItem.productName}</b>
+              <b>{cartItem.productName}</b>
             </Typography>
 
             <Typography sx={{ mb: 1.5 }} color="text.secondary">
@@ -69,7 +72,7 @@ export const CartItem = ({ CartItem }: Props) => {
 
           <Grid item xs={3}>
             <AspectRatio objectFit="contain">
-              <img src={CartItem.imageUrl} loading="lazy" alt="" />
+              <img src={cartItem.imageUrl} loading="lazy" alt="" />
             </AspectRatio>
           </Grid>
         </Grid>
@@ -85,7 +88,7 @@ export const CartItem = ({ CartItem }: Props) => {
           <b> - </b>
         </IconButton>
         <Button
-          onClick={() => handleDeleteCartItem(CartItem.productId)}
+          onClick={() => handleDeleteCartItem(cartItem.productId)}
           variant="outlined"
           color="error"
           startIcon={<DeleteIcon />}

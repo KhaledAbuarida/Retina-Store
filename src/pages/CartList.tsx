@@ -5,9 +5,10 @@ import { ICartItem } from "../utils/AppData";
 
 interface Props {
   cartItems: ICartItem[];
+  setCartItems: React.Dispatch<React.SetStateAction<ICartItem[]>>;
 }
 
-export const CartList = ({ cartItems }: Props) => {
+export const CartList = ({ cartItems, setCartItems }: Props) => {
   if (cartItems.length === 0) {
     return (
       <Container>
@@ -29,7 +30,11 @@ export const CartList = ({ cartItems }: Props) => {
 
       {cartItems.map((item) => (
         <Box marginTop={2} key={item.productId}>
-          <CartItem CartItem={item} />
+          <CartItem
+            cartItem={item}
+            cartItems={cartItems}
+            setCartItems={setCartItems}
+          />
         </Box>
       ))}
 

@@ -12,8 +12,19 @@ export const getCartItems = async () => {
 
 // delete item from the cart
 export const deleteCartItem = async (productId: string) => {
-    const response = await fetch(`${BASE_URL}/cart/${USER_ID}/${productId}`);
+    const response = await fetch(`${BASE_URL}/cart/${USER_ID}/${productId}`, {
+        method: "DELETE",
+    });
 
-    console.log(response);
     return response;
+}
+
+export const addItemToCart = async (userId: string, productId: string, quantity: number, unitPrice: number, productName: string, imageUrl: string) => {
+    const response = await fetch(`${BASE_URL}/cart/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({userId, productId, productName, unitPrice, quantity, imageUrl})
+    })
 }

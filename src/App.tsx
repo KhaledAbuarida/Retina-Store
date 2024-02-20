@@ -42,8 +42,21 @@ function App() {
       <CartContextProvider>
         <AppHeader cartItemsLength={cartItems.length} />
         <Routes>
-          <Route index element={<ProductList productsList={products} />} />
-          <Route path="/cart" element={<CartList cartItems={cartItems} />} />
+          <Route
+            index
+            element={
+              <ProductList
+                productsList={products}
+                setCartItems={setCartItems}
+              />
+            }
+          />
+          <Route
+            path="/cart"
+            element={
+              <CartList cartItems={cartItems} setCartItems={setCartItems} />
+            }
+          />
           <Route path="/add" element={<AddProduct />} />
           <Route path="/Checkout" element={<Checkout />} />
         </Routes>
