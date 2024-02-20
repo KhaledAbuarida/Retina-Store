@@ -7,6 +7,7 @@ interface CartContextType {
   deleteCartItem: (id: number) => void;
   totalPrice: number;
   handleTotalPrice: (price: number) => void;
+  setCartItems: React.Dispatch<React.SetStateAction<ICartItem[]>>;
 }
 
 export const CartContext = createContext<CartContextType | undefined>(
@@ -27,7 +28,7 @@ export const CartContextProvider: React.FC<CartContextProviderProps> = ({
   useEffect(() => {
     // Calculate total price whenever cartItems or the quantity of any cartItem changes
     const newTotalPrice = cartItems.reduce(
-      (total, item) => total + item.price * item.quantity,
+      (total, item) => total + item.unitPrice * item.quantity,
       0
     );
     setTotalPrice(newTotalPrice);
@@ -35,16 +36,12 @@ export const CartContextProvider: React.FC<CartContextProviderProps> = ({
 
   // ADDING TO CART
   const addToCart = (item: ICartItem) => {
-    const isCartItemExist = cartItems.find((ittr) => ittr._id === item._id);
-    if (!isCartItemExist) {
-      setCartItems((prevItems) => [...prevItems, item]);
-      // setCartItems([...cartItems, item])
-    }
+    setCartItems([...cartItems, item]);
   };
 
   // DELETE FROM CART
   const deleteCartItem = (id: number) => {
-    setCartItems(cartItems.filter((item) => item._id !== id));
+    // setCartItems(cartItems.filter((item) => item.productId.toString() !== id));
   };
 
   // SET TOTAL PRICE
@@ -54,6 +51,7 @@ export const CartContextProvider: React.FC<CartContextProviderProps> = ({
 
   const contextValue: CartContextType = {
     cartItems,
+    setCartItems,
     addToCart,
     deleteCartItem,
     totalPrice,

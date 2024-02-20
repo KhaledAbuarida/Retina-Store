@@ -10,13 +10,13 @@ export interface IProduct {
 
 
 export interface ICartItem {
-    _id?: number
-    name: string
-    price: number
-    image: string
-    category: string
+    productName: string
+    productId: string
     quantity: number
-    stock: number
+    unitPrice: number
+    imageUrl: string
+    // category: string
+    // stock: number
 }
 
 export const productsList:IProduct[] = [

@@ -1,13 +1,13 @@
 import { AppBar, Container, Toolbar, Box, Badge, Button } from "@mui/material";
-import { useContext } from "react";
 import StorefrontIcon from "@mui/icons-material/Storefront";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { NavLink } from "react-router-dom";
-import { CartContext } from "../contexts/Cart.context";
 
-const AppHeader = () => {
-  const cartItems = useContext(CartContext);
+interface Props {
+  cartItemsLength: number;
+}
 
+const AppHeader = ({ cartItemsLength }: Props) => {
   return (
     <AppBar position="static" sx={{ backgroundColor: "#1D2B53" }}>
       <Container>
@@ -74,7 +74,7 @@ const AppHeader = () => {
             }}
           >
             <NavLink to="/cart" style={{ color: "white", marginRight: "10px" }}>
-              <Badge badgeContent={cartItems?.cartItems.length} color="primary">
+              <Badge badgeContent={cartItemsLength} color="primary">
                 <ShoppingCartIcon />
               </Badge>
             </NavLink>
