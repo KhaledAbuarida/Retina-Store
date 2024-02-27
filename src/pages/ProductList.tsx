@@ -19,7 +19,7 @@ export const ProductList = ({
     >
       {productsList.map((product) => (
         <ProductCard
-          key={product.productId}
+          key={product._id!}
           product={product}
           setCartItems={setCartItems}
           cartItems={cartItems}

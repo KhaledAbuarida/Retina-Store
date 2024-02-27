@@ -28,7 +28,7 @@ export const Paypal = () => {
               description: item.name,
               unit_amount: {
                 currency_code: "USD",
-                value: item.price.toFixed().toString(),
+                value: item.unitPrice.toFixed().toString(),
               },
               quantity: item.quantity.toString(),
             })),

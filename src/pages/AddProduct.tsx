@@ -4,8 +4,16 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useNavigate } from "react-router";
+import { addProduct } from "../api/product.api";
+import { IProduct } from "../utils/AppData";
+import { Dispatch } from "react";
 
-const AddProduct = () => {
+interface Props {
+  products: IProduct[];
+  setProducts: Dispatch<React.SetStateAction<IProduct[]>>;
+}
+
+const AddProduct = ({ products, setProducts }: Props) => {
   const navigate = useNavigate();
 
   // form validation schema
@@ -40,19 +48,16 @@ const AddProduct = () => {
   // handle form submission
   const onSubmit = async (data: any) => {
     try {
-      const response = await fetch(`${BaseUrl}/products/new`, {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      if (!response.ok) {
-        throw new Error(`Http error! Status: ${response.status}`);
+      const response = await addProduct(data);
+      if (response.status === 201) {
+        console.log("added");
+        reset();
+        navigate("/");
+        setProducts([...products, data]);
+      } else {
+        console.log("error");
+        alert("error");
       }
-      const newProduct = response.json();
-      reset();
-      navigate("/");
     } catch (err) {
       console.error("Error:", err);
     }
@@ -70,7 +75,11 @@ const AddProduct = () => {
           {...register("name")}
         />
         {errors.name && (
-          <Typography variant="caption" color="red" display="block">
+          <Typography
+            variant="caption"
+            color="red"
+            display="block"
+          >
             {errors.name?.message}
           </Typography>
         )}
@@ -84,7 +93,11 @@ const AddProduct = () => {
           {...register("image")}
         />
         {errors.image && (
-          <Typography variant="caption" color="red" display="block">
+          <Typography
+            variant="caption"
+            color="red"
+            display="block"
+          >
             {errors.image?.message}
           </Typography>
         )}
@@ -98,7 +111,11 @@ const AddProduct = () => {
           {...register("price")}
         />
         {errors.price && (
-          <Typography variant="caption" color="red" display="block">
+          <Typography
+            variant="caption"
+            color="red"
+            display="block"
+          >
             {errors.price?.message}
           </Typography>
         )}
@@ -112,7 +129,11 @@ const AddProduct = () => {
           {...register("category")}
         />
         {errors.category && (
-          <Typography variant="caption" color="red" display="block">
+          <Typography
+            variant="caption"
+            color="red"
+            display="block"
+          >
             {errors.category?.message}
           </Typography>
         )}
@@ -126,12 +147,20 @@ const AddProduct = () => {
           {...register("stock")}
         />
         {errors.stock && (
-          <Typography variant="caption" color="red" display="block">
+          <Typography
+            variant="caption"
+            color="red"
+            display="block"
+          >
             {errors.stock?.message}
           </Typography>
         )}
 
-        <Button variant="contained" color="primary" type="submit">
+        <Button
+          variant="contained"
+          color="primary"
+          type="submit"
+        >
           Submit
         </Button>
       </form>

@@ -28,8 +28,11 @@ export const CartList = ({ cartItems, setCartItems }: Props) => {
     <Container sx={{ padding: "20px" }}>
       {/* <h2>Total Price: ${cartItems}</h2> */}
 
-      {cartItems.map((item) => (
-        <Box marginTop={2} key={item.productId}>
+      {cartItems.map((item: any) => (
+        <Box
+          marginTop={2}
+          key={item.product._id}
+        >
           <CartItem
             cartItem={item}
             cartItems={cartItems}

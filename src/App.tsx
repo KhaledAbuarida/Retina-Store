@@ -22,7 +22,6 @@ function App() {
     // fetch products
     const fetchProducts = async () => {
       const fetchedProducts = await getProducts();
-      console.log(fetchedProducts);
       setProducts(fetchedProducts);
     };
 
@@ -48,17 +47,32 @@ function App() {
               <ProductList
                 productsList={products}
                 setCartItems={setCartItems}
+                cartItems={cartItems}
               />
             }
           />
           <Route
             path="/cart"
             element={
-              <CartList cartItems={cartItems} setCartItems={setCartItems} />
+              <CartList
+                cartItems={cartItems}
+                setCartItems={setCartItems}
+              />
             }
           />
-          <Route path="/add" element={<AddProduct />} />
-          <Route path="/Checkout" element={<Checkout />} />
+          <Route
+            path="/add"
+            element={
+              <AddProduct
+                products={products}
+                setProducts={setProducts}
+              />
+            }
+          />
+          <Route
+            path="/Checkout"
+            element={<Checkout />}
+          />
         </Routes>
       </CartContextProvider>
     </BrowserRouter>

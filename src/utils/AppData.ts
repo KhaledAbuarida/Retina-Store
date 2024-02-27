@@ -1,6 +1,6 @@
 
 export interface IProduct {
-    productId: string
+    _id?: string
     name: string
     price: number
     image: string
@@ -10,16 +10,15 @@ export interface IProduct {
 
 
 export interface ICartItem {
-    productName: string
-    productId: string
+    product: string
     quantity: number
     unitPrice: number
-    imageUrl: string
-    // category: string
-    // stock: number
+    image: string
+    name: string
+    category: string
 }
 
-export const productsList:IProduct[] = [
+export const productsList: IProduct[] = [
     // {name: 'Lenovo G3', price: 20999, image: 'https://m.media-amazon.com/images/I/516F3sfYp4L.__AC_SY300_SX300_QL70_ML2_.jpg',category: 'laptop',stock: 20},
     // {name: 'MacBook Air M2', price: 30099, image: 'https://m.media-amazon.com/images/I/51D9YY8bYBL._AC_SL1500_.jpg', category: 'laptop',stock: 20 },
     // {name: 'HP Victus', price: 40099, image: 'https://m.media-amazon.com/images/I/81uTW77d3rL._AC_SL1500_.jpg', category: 'laptop',stock: 20 },
