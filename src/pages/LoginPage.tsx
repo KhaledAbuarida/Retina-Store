@@ -79,7 +79,7 @@ const LoginPage = () => {
                   {errors.password.message}
                 </Typography>
               )}
-            </Box>
+            </Box>  
             <Button variant="contained" type="submit">
               Login
             </Button>
