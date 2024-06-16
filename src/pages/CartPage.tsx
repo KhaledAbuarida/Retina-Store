@@ -1,14 +1,11 @@
 import { Box, Button, Container, Typography } from "@mui/material";
 import { CartItem } from "../components/CartItem";
 import { NavLink } from "react-router-dom";
-import { ICartItem } from "../utils/AppData";
+import { useCart } from "../contexts/cart/CartContext";
 
-interface Props {
-  cartItems: ICartItem[];
-  setCartItems: React.Dispatch<React.SetStateAction<ICartItem[]>>;
-}
+export const CartList = () => {
+  const { cartItems } = useCart();
 
-export const CartList = ({ cartItems, setCartItems }: Props) => {
   if (cartItems.length === 0) {
     return (
       <Container>
@@ -29,15 +26,8 @@ export const CartList = ({ cartItems, setCartItems }: Props) => {
       {/* <h2>Total Price: ${cartItems}</h2> */}
 
       {cartItems.map((item: any) => (
-        <Box
-          marginTop={2}
-          key={item.product._id}
-        >
-          <CartItem
-            cartItem={item}
-            cartItems={cartItems}
-            setCartItems={setCartItems}
-          />
+        <Box marginTop={2} key={item.product._id}>
+          <CartItem cartItem={item} />
         </Box>
       ))}
 

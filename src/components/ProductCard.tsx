@@ -3,7 +3,7 @@ import Button from "@mui/joy/Button";
 import Card from "@mui/joy/Card";
 import CardContent from "@mui/joy/CardContent";
 import Typography from "@mui/joy/Typography";
-import { addItemToCart } from "../api/cart.api";
+import { addItemToCart } from "../api/cartAPI";
 import { ICartItem } from "../types/cart";
 import { IProduct } from "../types/product";
 

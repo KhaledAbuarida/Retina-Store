@@ -1,19 +1,11 @@
 import { Button, Container, TextField, Typography } from "@mui/material";
-import { BaseUrl } from "../App";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useNavigate } from "react-router";
 import { addProduct } from "../api/productAPI";
-import { IProduct } from "../utils/AppData";
-import { Dispatch } from "react";
 
-interface Props {
-  products: IProduct[];
-  setProducts: Dispatch<React.SetStateAction<IProduct[]>>;
-}
-
-const AddProduct = ({ products, setProducts }: Props) => {
+const AddProduct = () => {
   const navigate = useNavigate();
 
   // form validation schema
@@ -53,7 +45,7 @@ const AddProduct = ({ products, setProducts }: Props) => {
         console.log("added");
         reset();
         navigate("/");
-        setProducts([...products, data]);
+        // setProducts([...products, data]);
       } else {
         console.log("error");
         alert("error");
