@@ -1,28 +1,21 @@
 import { Container } from "@mui/material";
 import { ProductCard } from "../components/ProductCard";
-import { ICartItem, IProduct } from "../utils/AppData";
+import { IProduct } from "../types/product";
+import { useProduct } from "../contexts/product/ProductContext";
 
-interface Props {
-  productsList: IProduct[];
-  setCartItems: React.Dispatch<React.SetStateAction<ICartItem[]>>;
-  cartItems: ICartItem[];
-}
-
-export const ProductList = ({
-  productsList,
-  setCartItems,
-  cartItems,
-}: Props) => {
+export const ProductList = () => {
+  const { products } = useProduct();
   return (
     <Container
       sx={{ paddingTop: "20px", display: "flex", flexWrap: "wrap", gap: 4 }}
     >
-      {productsList.map((product) => (
+      {products.map((product: IProduct) => (
         <ProductCard
-          key={product._id!}
-          product={product}
-          setCartItems={setCartItems}
-          cartItems={cartItems}
+          key={product._id}
+          {...product}
+          // product={product}
+          // setCartItems={setCartItems}
+          // cartItems={cartItems}
         />
       ))}
     </Container>

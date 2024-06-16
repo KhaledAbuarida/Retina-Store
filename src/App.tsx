@@ -4,13 +4,13 @@ import { CartList } from "./pages/CartList";
 import { CartContextProvider } from "./contexts/Cart.context";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AddProduct from "./pages/AddProduct";
-import { ICartItem, IProduct } from "./utils/AppData";
 import { useEffect, useState } from "react";
 import { Checkout } from "./pages/Checkout";
-import { getProducts } from "./api/product.api";
+import { getProducts } from "./api/productAPI";
 import { getCartItems } from "./api/cart.api";
-
-export const BaseUrl = "http://localhost:3001";
+import { IProduct } from "./types/product";
+import { ICartItem } from "./types/cart";
+import ProductProvider from "./contexts/product/ProductProvider";
 
 function App() {
   // States
@@ -20,10 +20,10 @@ function App() {
 
   useEffect(() => {
     // fetch products
-    const fetchProducts = async () => {
-      const fetchedProducts = await getProducts();
-      setProducts(fetchedProducts);
-    };
+    // const fetchProducts = async () => {
+    //   const fetchedProducts = await getProducts();
+    //   setProducts(fetchedProducts);
+    // };
 
     // fetch cart items
     const fetchCartItems = async () => {
@@ -32,49 +32,33 @@ function App() {
       setCartItems(fetchedCartItems);
     };
 
-    fetchProducts();
+    // fetchProducts();
     fetchCartItems();
   }, []);
 
   return (
     <BrowserRouter>
-      <CartContextProvider>
-        <AppHeader cartItemsLength={cartItems.length} />
-        <Routes>
-          <Route
-            index
-            element={
-              <ProductList
-                productsList={products}
-                setCartItems={setCartItems}
-                cartItems={cartItems}
-              />
-            }
-          />
-          <Route
-            path="/cart"
-            element={
-              <CartList
-                cartItems={cartItems}
-                setCartItems={setCartItems}
-              />
-            }
-          />
-          <Route
-            path="/add"
-            element={
-              <AddProduct
-                products={products}
-                setProducts={setProducts}
-              />
-            }
-          />
-          <Route
-            path="/Checkout"
-            element={<Checkout />}
-          />
-        </Routes>
-      </CartContextProvider>
+      <ProductProvider>
+        <CartContextProvider>
+          <AppHeader cartItemsLength={cartItems.length} />
+          <Routes>
+            <Route index element={<ProductList />} />
+            <Route
+              path="/cart"
+              element={
+                <CartList cartItems={cartItems} setCartItems={setCartItems} />
+              }
+            />
+            <Route
+              path="/add"
+              element={
+                <AddProduct products={products} setProducts={setProducts} />
+              }
+            />
+            <Route path="/Checkout" element={<Checkout />} />
+          </Routes>
+        </CartContextProvider>
+      </ProductProvider>
     </BrowserRouter>
   );
 }

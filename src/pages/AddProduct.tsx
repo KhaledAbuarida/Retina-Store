@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useNavigate } from "react-router";
-import { addProduct } from "../api/product.api";
+import { addProduct } from "../api/productAPI";
 import { IProduct } from "../utils/AppData";
 import { Dispatch } from "react";
 
@@ -75,11 +75,7 @@ const AddProduct = ({ products, setProducts }: Props) => {
           {...register("name")}
         />
         {errors.name && (
-          <Typography
-            variant="caption"
-            color="red"
-            display="block"
-          >
+          <Typography variant="caption" color="red" display="block">
             {errors.name?.message}
           </Typography>
         )}
@@ -93,11 +89,7 @@ const AddProduct = ({ products, setProducts }: Props) => {
           {...register("image")}
         />
         {errors.image && (
-          <Typography
-            variant="caption"
-            color="red"
-            display="block"
-          >
+          <Typography variant="caption" color="red" display="block">
             {errors.image?.message}
           </Typography>
         )}
@@ -111,11 +103,7 @@ const AddProduct = ({ products, setProducts }: Props) => {
           {...register("price")}
         />
         {errors.price && (
-          <Typography
-            variant="caption"
-            color="red"
-            display="block"
-          >
+          <Typography variant="caption" color="red" display="block">
             {errors.price?.message}
           </Typography>
         )}
@@ -129,11 +117,7 @@ const AddProduct = ({ products, setProducts }: Props) => {
           {...register("category")}
         />
         {errors.category && (
-          <Typography
-            variant="caption"
-            color="red"
-            display="block"
-          >
+          <Typography variant="caption" color="red" display="block">
             {errors.category?.message}
           </Typography>
         )}
@@ -147,20 +131,12 @@ const AddProduct = ({ products, setProducts }: Props) => {
           {...register("stock")}
         />
         {errors.stock && (
-          <Typography
-            variant="caption"
-            color="red"
-            display="block"
-          >
+          <Typography variant="caption" color="red" display="block">
             {errors.stock?.message}
           </Typography>
         )}
 
-        <Button
-          variant="contained"
-          color="primary"
-          type="submit"
-        >
+        <Button variant="contained" color="primary" type="submit">
           Submit
         </Button>
       </form>
