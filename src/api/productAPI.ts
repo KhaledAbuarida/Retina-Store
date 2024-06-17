@@ -1,6 +1,6 @@
 import { API_BASE_URL } from "../constants/apiBaseUrl";
 
-export const getProducts = async () => {
+export const getProductsAPI = async () => {
   const response = await fetch(`${API_BASE_URL}/products`, {
     method: "GET",
   });
@@ -9,7 +9,7 @@ export const getProducts = async () => {
   return data;
 };
 
-export const addProduct = async (data: any) => {
+export const addProductAPI = async (data: any) => {
   const response = await fetch(`${API_BASE_URL}/products/add`, {
     method: "POST",
     body: JSON.stringify(data),

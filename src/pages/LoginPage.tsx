@@ -2,8 +2,18 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Box, Button, Container, TextField, Typography } from "@mui/material";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
+import { loginAPI } from "../api/userAPI";
+import { useState } from "react";
+import { useAuth } from "../contexts/Auth/AuthContext";
 
 const LoginPage = () => {
+  // states
+  const [error, setError] = useState<string | null>(null);
+
+  // contexts
+  const { login } = useAuth();
+
+  // form validation schema
   const validationSchema = yup.object().shape({
     email: yup.string().email("Invalid email").required("Email is required!"),
     password: yup.string().required("Password is required!"),
@@ -18,8 +28,18 @@ const LoginPage = () => {
     resolver: yupResolver(validationSchema),
   });
 
-  const onSubmit = (data: any) => {
-    console.log(data);
+  const onSubmit = async (data: any) => {
+    const { response } = await loginAPI(data);
+
+    if (!response.token) {
+      setError(response);
+      return;
+    }
+
+    console.log(response);
+    setError(null);
+
+    login(response.token, response.user.userName);
   };
 
   return (
@@ -35,6 +55,7 @@ const LoginPage = () => {
         }}
       >
         <Typography variant="h5">Login</Typography>
+
         <form
           style={{
             width: "30%",
@@ -79,12 +100,17 @@ const LoginPage = () => {
                   {errors.password.message}
                 </Typography>
               )}
-            </Box>  
+            </Box>
             <Button variant="contained" type="submit">
               Login
             </Button>
           </Box>
         </form>
+        {error && (
+          <Typography variant="caption" color="red">
+            {error}
+          </Typography>
+        )}
       </Box>
     </Container>
   );

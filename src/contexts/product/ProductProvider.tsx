@@ -1,6 +1,6 @@
 import { FC, PropsWithChildren, useEffect, useState } from "react";
 import { productContext } from "./ProductContext";
-import { getProducts } from "../../api/productAPI";
+import { getProductsAPI } from "../../api/productAPI";
 import { IProduct } from "../../types/product";
 
 const ProductProvider: FC<PropsWithChildren> = ({ children }) => {
@@ -8,7 +8,7 @@ const ProductProvider: FC<PropsWithChildren> = ({ children }) => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const products = await getProducts();
+      const products = await getProductsAPI();
       setProducts(products);
     };
 

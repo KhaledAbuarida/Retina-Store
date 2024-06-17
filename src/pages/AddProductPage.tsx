@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useNavigate } from "react-router";
-import { addProduct } from "../api/productAPI";
+import { addProductAPI } from "../api/productAPI";
 
 const AddProduct = () => {
   const navigate = useNavigate();
@@ -40,7 +40,7 @@ const AddProduct = () => {
   // handle form submission
   const onSubmit = async (data: any) => {
     try {
-      const response = await addProduct(data);
+      const response = await addProductAPI(data);
       if (response.status === 201) {
         console.log("added");
         reset();

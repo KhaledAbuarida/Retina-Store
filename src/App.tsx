@@ -11,6 +11,7 @@ import { ICartItem } from "./types/cart";
 import ProductProvider from "./contexts/product/ProductProvider";
 import CartProvider from "./contexts/cart/CartProvider";
 import LoginPage from "./pages/LoginPage";
+import AuthProvider from "./contexts/Auth/AuthProvider";
 
 function App() {
   // States
@@ -36,18 +37,20 @@ function App() {
 
   return (
     <BrowserRouter>
-      <ProductProvider>
-        <CartProvider>
-          <AppHeader cartItemsLength={2} />
-          <Routes>
-            <Route index element={<ProductList />} />
-            <Route path="/cart" element={<CartList />} />
-            <Route path="/add" element={<AddProduct />} />
-            <Route path="/checkout" element={<Checkout />} />
-            <Route path="/login" element={<LoginPage />} />
-          </Routes>
-        </CartProvider>
-      </ProductProvider>
+      <AuthProvider>
+        <ProductProvider>
+          <CartProvider>
+            <AppHeader cartItemsLength={2} />
+            <Routes>
+              <Route index element={<ProductList />} />
+              <Route path="/cart" element={<CartList />} />
+              <Route path="/add" element={<AddProduct />} />
+              <Route path="/checkout" element={<Checkout />} />
+              <Route path="/login" element={<LoginPage />} />
+            </Routes>
+          </CartProvider>
+        </ProductProvider>
+      </AuthProvider>
     </BrowserRouter>
   );
 }
