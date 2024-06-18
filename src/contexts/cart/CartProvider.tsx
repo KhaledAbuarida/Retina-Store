@@ -1,7 +1,7 @@
 import { FC, PropsWithChildren, useEffect, useState } from "react";
 import { ICartItem } from "../../types/cartTypes";
 import { cartContext } from "./CartContext";
-import { getCartItemsAPI } from "../../api/cartAPI";
+import { addCartItemAPI, getCartItemsAPI } from "../../api/cartAPI";
 import { useAuth } from "../Auth/AuthContext";
 
 const CartProvider: FC<PropsWithChildren> = ({ children }) => {
@@ -25,8 +25,17 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
     fetchCartItems();
   }, [token]);
 
+  const addCartItem = async (productId: string, unitPrice: number) => {
+    if (!token) {
+      return;
+    }
+    const cart = await addCartItemAPI({ token, productId, unitPrice });
+    setCartItems([...cart.items]);
+    setTotalAmount(cart.totalAmount);
+  };
+
   return (
-    <cartContext.Provider value={{ cartItems, totalAmount }}>
+    <cartContext.Provider value={{ cartItems, totalAmount, addCartItem }}>
       {children}
     </cartContext.Provider>
   );

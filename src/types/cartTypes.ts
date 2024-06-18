@@ -20,7 +20,7 @@ export interface ICart {
 export interface addCartItemAPIParams {
   token: string;
   productId: string;
-  unitPrice: string;
+  unitPrice: number;
 }
 
 // get cart items params for cart api GET function

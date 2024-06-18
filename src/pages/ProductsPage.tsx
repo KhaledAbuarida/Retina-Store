@@ -13,9 +13,6 @@ export const ProductList = () => {
         <ProductCard
           key={product._id}
           {...product}
-          // product={product}
-          // setCartItems={setCartItems}
-          // cartItems={cartItems}
         />
       ))}
     </Container>

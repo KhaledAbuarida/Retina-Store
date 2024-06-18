@@ -1,7 +1,10 @@
 import { API_BASE_URL } from "../constants/apiBaseUrl";
-import { getCartItemsAPIParams } from "../types/cartTypes";
+import {
+  addCartItemAPIParams,
+  getCartItemsAPIParams,
+} from "../types/cartTypes";
 
-// get all cart items for user
+// get cart items for user
 export const getCartItemsAPI = async ({ token }: getCartItemsAPIParams) => {
   const response = await fetch(`${API_BASE_URL}/cart`, {
     method: "GET",
@@ -17,6 +20,26 @@ export const getCartItemsAPI = async ({ token }: getCartItemsAPIParams) => {
   return data;
 };
 
+export const addCartItemAPI = async ({
+  token,
+  productId,
+  unitPrice,
+}: addCartItemAPIParams) => {
+  const response = await fetch(`${API_BASE_URL}/cart/add`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ productId, unitPrice }),
+  });
+
+  const data = await response.json();
+
+  // return the updated cart
+  return data;
+};
+
 // delete item from the cart
 export const deleteCartItem = async (productId: string) => {
   const response = await fetch(`${API_BASE_URL}/cart/delete//${productId}`, {
@@ -25,18 +48,6 @@ export const deleteCartItem = async (productId: string) => {
 
   return response;
 };
-
-// export const addItemToCart = async ({ product, quantity, unitPrice }) => {
-//   const response = await fetch(`${API_BASE_URL}/cart/add/`, {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify({ product, quantity, unitPrice }),
-//   });
-
-//   return response.status;
-// };
 
 export const updateCartItemQuantity = async (
   productId: string,

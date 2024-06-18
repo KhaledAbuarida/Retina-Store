@@ -7,13 +7,15 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { Grid, IconButton } from "@mui/material";
 import { AspectRatio } from "@mui/joy";
 import { ICartItem } from "../types/cartTypes";
-import { IProduct } from "../types/productTypes";
 
 interface Props {
   cartItem: ICartItem;
 }
 
 export const CartItem = ({ cartItem }: Props) => {
+  {
+    console.log("cartItem", cartItem);
+  }
   const { name, price, image, category } = cartItem.productId;
 
   return (
