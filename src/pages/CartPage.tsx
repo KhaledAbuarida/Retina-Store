@@ -6,7 +6,7 @@ import NotInterestedIcon from "@mui/icons-material/NotInterested";
 import { ICartItem } from "../types/cartTypes";
 
 export const CartList = () => {
-  const { cartItems } = useCart();
+  const { cartItems, totalAmount } = useCart();
 
   if (cartItems.length === 0) {
     return (
@@ -31,7 +31,7 @@ export const CartList = () => {
 
   return (
     <Container sx={{ padding: "20px" }}>
-      {/* <h2>Total Price: ${cartItems}</h2> */}
+      <h2>Total Price: ${totalAmount}</h2>
 
       {cartItems.map((item: ICartItem) => (
         <Box marginTop={2} key={item._id}>

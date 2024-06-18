@@ -27,3 +27,9 @@ export interface addCartItemAPIParams {
 export interface getCartItemsAPIParams {
   token: string;
 }
+
+// remove cart item params for cart api DELETE function
+export interface removeCartItemAPIParams {
+  productId: string;
+  token: string;
+}

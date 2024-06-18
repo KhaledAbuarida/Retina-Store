@@ -2,6 +2,7 @@ import { API_BASE_URL } from "../constants/apiBaseUrl";
 import {
   addCartItemAPIParams,
   getCartItemsAPIParams,
+  removeCartItemAPIParams,
 } from "../types/cartTypes";
 
 // get cart items for user
@@ -41,12 +42,22 @@ export const addCartItemAPI = async ({
 };
 
 // delete item from the cart
-export const deleteCartItem = async (productId: string) => {
-  const response = await fetch(`${API_BASE_URL}/cart/delete//${productId}`, {
+export const removeCartItemAPI = async ({
+  productId,
+  token,
+}: removeCartItemAPIParams) => {
+  const response = await fetch(`${API_BASE_URL}/cart/items/${productId}`, {
     method: "DELETE",
+    headers: {
+      "Content-Type": "application.json",
+      authorization: `Bearer ${token}`,
+    },
   });
 
-  return response;
+  const data = await response.json();
+
+  // return updated cart
+  return data;
 };
 
 export const updateCartItemQuantity = async (

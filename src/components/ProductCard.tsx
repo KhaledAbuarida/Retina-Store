@@ -17,7 +17,6 @@ export const ProductCard = ({
   const { addCartItem } = useCart();
 
   const handleAddToCart = () => {
-    console.log("productId (_id)", _id);
     addCartItem(_id, price);
   };
 

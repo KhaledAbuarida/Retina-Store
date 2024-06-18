@@ -3,20 +3,26 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import DeleteIcon from "@mui/icons-material/Delete";
 import { Grid, IconButton } from "@mui/material";
 import { AspectRatio } from "@mui/joy";
 import { ICartItem } from "../types/cartTypes";
+import { useCart } from "../contexts/cart/CartContext";
 
 interface Props {
   cartItem: ICartItem;
 }
 
 export const CartItem = ({ cartItem }: Props) => {
-  {
-    console.log("cartItem", cartItem);
-  }
-  const { name, price, image, category } = cartItem.productId;
+  // destructing
+  const { _id, name, price, image, category } = cartItem.productId;
+
+  // contexts
+  const { removeCartItem } = useCart();
+
+  // handlers
+  const handleRemoveCartItem = () => {
+    removeCartItem(_id);
+  };
 
   return (
     <Card sx={{ minWidth: 275 }}>
@@ -53,8 +59,8 @@ export const CartItem = ({ cartItem }: Props) => {
           <b> - </b>
         </IconButton>
 
-        <Button variant="outlined" color="error" startIcon={<DeleteIcon />}>
-          Delete
+        <Button variant="outlined" color="error" onClick={handleRemoveCartItem}>
+          Remove
         </Button>
       </CardActions>
     </Card>

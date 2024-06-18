@@ -1,7 +1,11 @@
 import { FC, PropsWithChildren, useEffect, useState } from "react";
 import { ICartItem } from "../../types/cartTypes";
 import { cartContext } from "./CartContext";
-import { addCartItemAPI, getCartItemsAPI } from "../../api/cartAPI";
+import {
+  addCartItemAPI,
+  getCartItemsAPI,
+  removeCartItemAPI,
+} from "../../api/cartAPI";
 import { useAuth } from "../Auth/AuthContext";
 
 const CartProvider: FC<PropsWithChildren> = ({ children }) => {
@@ -29,13 +33,31 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
     if (!token) {
       return;
     }
+
     const cart = await addCartItemAPI({ token, productId, unitPrice });
     setCartItems([...cart.items]);
     setTotalAmount(cart.totalAmount);
   };
 
+  const removeCartItem = async (productId: string) => {
+    if (!token) {
+      return;
+    }
+    // deleting the cart item
+    setCartItems([
+      ...cartItems.filter((item) => item.productId._id !== productId),
+    ]);
+
+    const cart = await removeCartItemAPI({ productId, token });
+
+    setTotalAmount(cart.totalAmount);
+    setTotalAmount(cart.totalAmount);
+  };
+
   return (
-    <cartContext.Provider value={{ cartItems, totalAmount, addCartItem }}>
+    <cartContext.Provider
+      value={{ cartItems, totalAmount, addCartItem, removeCartItem }}
+    >
       {children}
     </cartContext.Provider>
   );
