@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import { IProduct } from "../../types/product";
+import { IProduct } from "../../types/productTypes";
 
 interface ProductContextType {
   products: IProduct[];

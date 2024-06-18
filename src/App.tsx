@@ -6,8 +6,8 @@ import AddProduct from "./pages/AddProductPage";
 import { useEffect, useState } from "react";
 import { Checkout } from "./pages/CheckoutPage";
 import { getCartItems } from "./api/cartAPI";
-import { IProduct } from "./types/product";
-import { ICartItem } from "./types/cart";
+import { IProduct } from "./types/productTypes";
+import { ICartItem } from "./types/cartTypes";
 import ProductProvider from "./contexts/product/ProductProvider";
 import CartProvider from "./contexts/cart/CartProvider";
 import LoginPage from "./pages/LoginPage";
@@ -41,7 +41,7 @@ function App() {
       <AuthProvider>
         <ProductProvider>
           <CartProvider>
-            <AppHeader cartItemsLength={2} />
+            <AppHeader />
             <Routes>
               <Route index element={<ProductList />} />
               <Route path="/cart" element={<CartList />} />

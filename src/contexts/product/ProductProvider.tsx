@@ -1,7 +1,7 @@
 import { FC, PropsWithChildren, useEffect, useState } from "react";
 import { productContext } from "./ProductContext";
 import { getProductsAPI } from "../../api/productAPI";
-import { IProduct } from "../../types/product";
+import { IProduct } from "../../types/productTypes";
 
 const ProductProvider: FC<PropsWithChildren> = ({ children }) => {
   const [products, setProducts] = useState<IProduct[]>([]);

@@ -2,19 +2,27 @@ import { Box, Button, Container, Typography } from "@mui/material";
 import { CartItem } from "../components/CartItem";
 import { NavLink } from "react-router-dom";
 import { useCart } from "../contexts/cart/CartContext";
+import NotInterestedIcon from "@mui/icons-material/NotInterested";
+import { ICartItem } from "../types/cartTypes";
 
 export const CartList = () => {
   const { cartItems } = useCart();
 
   if (cartItems.length === 0) {
     return (
-      <Container>
-        <Typography
-          align="center"
-          variant="h5"
-          color="#bdbdbd"
-          sx={{ marginTop: "30%" }}
-        >
+      <Container
+        sx={{
+          height: "calc(100vh - 100px)",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
+        }}
+      >
+        <Box>
+          <NotInterestedIcon sx={{ fontSize: "120px", color: "#bdbdbd" }} />
+        </Box>
+        <Typography align="center" variant="h4" color="#bdbdbd">
           There is no items yet
         </Typography>
       </Container>
@@ -25,8 +33,8 @@ export const CartList = () => {
     <Container sx={{ padding: "20px" }}>
       {/* <h2>Total Price: ${cartItems}</h2> */}
 
-      {cartItems.map((item: any) => (
-        <Box marginTop={2} key={item.product._id}>
+      {cartItems.map((item: ICartItem) => (
+        <Box marginTop={2} key={item._id}>
           <CartItem cartItem={item} />
         </Box>
       ))}

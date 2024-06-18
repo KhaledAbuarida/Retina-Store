@@ -1,6 +1,6 @@
 import { Container } from "@mui/material";
 import { ProductCard } from "../components/ProductCard";
-import { IProduct } from "../types/product";
+import { IProduct } from "../types/productTypes";
 import { useProduct } from "../contexts/product/ProductContext";
 
 export const ProductList = () => {

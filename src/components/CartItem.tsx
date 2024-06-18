@@ -4,53 +4,17 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Alert, Grid, IconButton } from "@mui/material";
-import { useState } from "react";
+import { Grid, IconButton } from "@mui/material";
 import { AspectRatio } from "@mui/joy";
-import { ICartItem } from "../types/cart";
+import { ICartItem } from "../types/cartTypes";
+import { IProduct } from "../types/productTypes";
 
 interface Props {
-  cartItem: ICartItem | any;
+  cartItem: ICartItem;
 }
 
 export const CartItem = ({ cartItem }: Props) => {
-  const { _id, stock, name, price, image } = cartItem.product;
-
-  const [itemQuantity, setItemQuantity] = useState(cartItem.quantity);
-  const [itemPrice, setItemPrice] = useState(itemQuantity * cartItem.unitPrice);
-  const [error, setError] = useState<string>("");
-
-  // handle delete cart item
-  // const handleDeleteCartItem = async () => {
-  //   setCartItems(cartItems.filter((item: any) => item.product._id !== _id));
-  //   await deleteCartItem(_id);
-  // };
-
-  // Function to increment item quantity
-  // const incrementQuantity = () => {
-  //   let newQuantity;
-  //   if (itemQuantity < stock) {
-  //     newQuantity = itemQuantity + 1;
-  //     setItemQuantity(newQuantity);
-  //   } else {
-  //     setError("Insufficient Product Stock");
-  //     setTimeout(() => {
-  //       setError("");
-  //     }, 2000);
-  //   }
-  //   // setItemPrice(newQuantity * cartItem.unitPrice);
-  //   updateCartItemQuantity(_id, newQuantity);
-  // };
-
-  // Function to decrement item quantity
-  // const decrementQuantity = () => {
-  //   if (itemQuantity > 1) {
-  //     const newQuantity = itemQuantity - 1;
-  //     setItemQuantity(newQuantity);
-  //     // setItemPrice(newQuantity * cartItem.unitPrice);
-  //     updateCartItemQuantity(_id, newQuantity);
-  //   }
-  // };
+  const { name, price, image, category } = cartItem.productId;
 
   return (
     <Card sx={{ minWidth: 275 }}>
@@ -62,11 +26,10 @@ export const CartItem = ({ cartItem }: Props) => {
             </Typography>
 
             <Typography sx={{ mb: 1.5 }} color="text.secondary">
-              {/* {CartItem.category} */}
+              {category}
             </Typography>
 
             <Typography variant="h6">
-              {/* TODO: HANDLE ITEM PRICE WITH QUANTITY */}
               <b>${price}</b>
             </Typography>
           </Grid>
@@ -79,27 +42,19 @@ export const CartItem = ({ cartItem }: Props) => {
         </Grid>
       </CardContent>
       <CardActions>
-        {/* Increase Item Quantity */}
-        {/* <IconButton onClick={incrementQuantity}> */}
-        <b> + </b>
-        {/* </IconButton> */}
-        {itemQuantity}
+        <IconButton>
+          <b> + </b>
+        </IconButton>
+        {cartItem.quantity}
 
-        {/* Decrease Item Quantity */}
-        {/* <IconButton onClick={decrementQuantity}> */}
-        <b> - </b>
-        {/* </IconButton> */}
+        <IconButton>
+          <b> - </b>
+        </IconButton>
 
-        <Button
-          // onClick={() => handleDeleteCartItem()}
-          variant="outlined"
-          color="error"
-          startIcon={<DeleteIcon />}
-        >
+        <Button variant="outlined" color="error" startIcon={<DeleteIcon />}>
           Delete
         </Button>
       </CardActions>
-      {error && <Alert severity="error">{error}</Alert>}
     </Card>
   );
 };

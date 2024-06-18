@@ -4,8 +4,8 @@ import Card from "@mui/joy/Card";
 import CardContent from "@mui/joy/CardContent";
 import Typography from "@mui/joy/Typography";
 import { addItemToCart } from "../api/cartAPI";
-import { ICartItem } from "../types/cart";
-import { IProduct } from "../types/product";
+import { ICartItem } from "../types/cartTypes";
+import { IProduct } from "../types/productTypes";
 
 export const ProductCard = ({ name, category, image, price }: IProduct) => {
   return (
