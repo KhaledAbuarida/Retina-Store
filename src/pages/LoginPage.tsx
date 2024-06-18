@@ -5,10 +5,15 @@ import * as yup from "yup";
 import { loginAPI } from "../api/userAPI";
 import { useState } from "react";
 import { useAuth } from "../contexts/Auth/AuthContext";
+import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 
 const LoginPage = () => {
   // states
   const [error, setError] = useState<string | null>(null);
+
+  // navigation
+  const navigate = useNavigate();
 
   // contexts
   const { login } = useAuth();
@@ -39,11 +44,22 @@ const LoginPage = () => {
     console.log(response);
     setError(null);
 
-    login(response.token, response.user.userName);
+    // setting token & username in auth context
+    login(response.token, response.username);
+
+    // navigating to home page
+    navigate("/");
+
+    // fill register form fields
+    reset();
   };
 
   return (
-    <Container>
+    <Container
+      sx={{
+        textAlign: "center",
+      }}
+    >
       <Box
         sx={{
           display: "flex",
@@ -52,13 +68,14 @@ const LoginPage = () => {
           flexDirection: "column",
           gap: 2,
           mt: 5,
+          mb: 2,
         }}
       >
         <Typography variant="h5">Login</Typography>
 
         <form
           style={{
-            width: "30%",
+            width: "40%",
           }}
           onSubmit={handleSubmit(onSubmit)}
         >
@@ -66,13 +83,12 @@ const LoginPage = () => {
             sx={{
               display: "flex",
               flexDirection: "column",
-              gap: 3,
+              gap: 2,
               mt: 2,
               border: 1,
               borderColor: "#f0f0f0",
               borderRadius: 2,
               p: 2,
-              // width: "30%",
             }}
           >
             <Box>
@@ -112,6 +128,13 @@ const LoginPage = () => {
           </Typography>
         )}
       </Box>
+      <Typography variant="body2">
+        Don't have account, Try to
+        <Link to="/register" style={{ color: "blue" }}>
+          {" "}
+          Sign Up
+        </Link>
+      </Typography>
     </Container>
   );
 };

@@ -12,6 +12,7 @@ import ProductProvider from "./contexts/product/ProductProvider";
 import CartProvider from "./contexts/cart/CartProvider";
 import LoginPage from "./pages/LoginPage";
 import AuthProvider from "./contexts/Auth/AuthProvider";
+import RegisterPage from "./pages/RegisterPage";
 
 function App() {
   // States
@@ -47,6 +48,7 @@ function App() {
               <Route path="/add" element={<AddProduct />} />
               <Route path="/checkout" element={<Checkout />} />
               <Route path="/login" element={<LoginPage />} />
+              <Route path="/register" element={<RegisterPage />} />
             </Routes>
           </CartProvider>
         </ProductProvider>

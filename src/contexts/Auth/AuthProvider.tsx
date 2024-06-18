@@ -6,8 +6,12 @@ const TOKEN_KEY = "token";
 const USERNAME_KEY = "username";
 
 const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
-  const [token, setToken] = useState<string | null>(null);
-  const [userName, setUserName] = useState<string | null>(null);
+  const [token, setToken] = useState<string | null>(
+    localStorage.getItem(TOKEN_KEY)
+  );
+  const [userName, setUserName] = useState<string | null>(
+    localStorage.getItem(USERNAME_KEY)
+  );
 
   const login = (token: string, userName: string) => {
     setToken(token);
