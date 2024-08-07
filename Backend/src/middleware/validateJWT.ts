@@ -2,6 +2,8 @@ import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import { ExtendedRequest, payloadTypes } from "../types/generalTypes";
 import { userModel } from "../models/userModel";
+import dotenv from "dotenv";
+dotenv.config();
 
 const validateJWT = async (
   req: ExtendedRequest,
@@ -23,27 +25,31 @@ const validateJWT = async (
       return;
     }
 
-    jwt.verify(token, process.env.SECRET_KEY || "", async (err, payload) => {
-      if (err) {
-        res.status(403).json(err);
-        return;
+    jwt.verify(
+      token,
+      process.env.JWT_SECRET_KEY || "",
+      async (err, payload) => {
+        if (err) {
+          res.status(403).json(err);
+          return;
+        }
+
+        if (!payload) {
+          res.status(403).json("Invalid Token!");
+          return;
+        }
+
+        const userPayload = payload as payloadTypes;
+
+        const user = await userModel.findOne({
+          email: userPayload.email,
+          userName: userPayload.userName,
+        });
+
+        req.user = user;
+        next();
       }
-
-      if (!payload) {
-        res.status(403).json("Invalid Token!");
-        return;
-      }
-
-      const userPayload = payload as payloadTypes;
-
-      const user = await userModel.findOne({
-        email: userPayload.email,
-        userName: userPayload.userName,
-      });
-
-      req.user = user;
-      next();
-    });
+    );
   } catch (err) {
     res.status(500).json(err);
   }

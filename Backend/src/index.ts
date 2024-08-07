@@ -5,6 +5,8 @@ import orderRouter from "./routers/orderRouter";
 import cartRouter from "./routers/cartRouter";
 import userRouter from "./routers/userRouter";
 import cors from "cors";
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
 const port = 3001;

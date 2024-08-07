@@ -42,12 +42,10 @@ const AddProduct = () => {
     try {
       const response = await addProductAPI(data);
       if (response.status === 201) {
-        console.log("added");
         reset();
         navigate("/");
         // setProducts([...products, data]);
       } else {
-        console.log("error");
         alert("error");
       }
     } catch (err) {

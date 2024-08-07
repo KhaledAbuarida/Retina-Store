@@ -52,7 +52,6 @@ export const Paypal = () => {
   useEffect(() => {
     if (success) {
       alert("Payment successful!!");
-      console.log("Order successful . Your order id is--", orderID);
     }
   }, [success]);
   return (

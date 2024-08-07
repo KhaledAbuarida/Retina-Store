@@ -3,7 +3,6 @@ import { loginUserProps, registerProps } from "../types/userServicesProps";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import dotenv from "dotenv";
-
 dotenv.config();
 
 export const register = async ({
@@ -90,7 +89,7 @@ export const login = async ({ email, password }: loginUserProps) => {
 // generate jsonwebtoken
 const generateJWT = (data: any) => {
   try {
-    return jwt.sign(data, process.env.SECRET_KEY || "");
+    return jwt.sign(data, process.env.JWT_SECRET_KEY || "");
   } catch (err) {
     return err;
   }

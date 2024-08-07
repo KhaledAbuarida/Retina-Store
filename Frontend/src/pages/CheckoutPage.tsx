@@ -22,7 +22,6 @@ export const Checkout = () => {
 
   const onSubmit = (data: any) => {
     setShow(data.radioGroup === "Paypal");
-    console.log(show);
   };
 
   const initialOptions = {

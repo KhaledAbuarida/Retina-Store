@@ -41,7 +41,6 @@ const LoginPage = () => {
       return;
     }
 
-    console.log(response);
     setError(null);
 
     // setting token & username in auth context

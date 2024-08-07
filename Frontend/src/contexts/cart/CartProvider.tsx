@@ -7,14 +7,18 @@ import {
   removeCartItemAPI,
 } from "../../api/cartAPI";
 import { useAuth } from "../Auth/AuthContext";
+import { calcCartTotalAmount } from "../../utils/cartUtils";
+import { useProduct } from "../product/ProductContext";
+import { IProduct } from "../../types/productTypes";
 
 const CartProvider: FC<PropsWithChildren> = ({ children }) => {
   // states
   const [cartItems, setCartItems] = useState<ICartItem[]>([]);
   const [totalAmount, setTotalAmount] = useState<number | null>(null);
 
-  // token form auth context
+  // contexts
   const { token } = useAuth();
+  const { products } = useProduct();
 
   useEffect(() => {
     if (!token) {
@@ -34,7 +38,25 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
       return;
     }
 
+    const productToAdd: IProduct | undefined = products.find(
+      (p: IProduct) => p._id === productId
+    );
+
+    // validate product
+    if (!productToAdd) {
+      return;
+    }
+
+    const cartItem: ICartItem = {
+      productId: productToAdd,
+      quantity: 1,
+      unitPrice: productToAdd.price,
+    };
+
+    setCartItems([...cartItems, cartItem]);
+
     const cart = await addCartItemAPI({ token, productId, unitPrice });
+
     setCartItems([...cart.items]);
     setTotalAmount(cart.totalAmount);
   };
@@ -44,14 +66,15 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
       return;
     }
     // deleting the cart item
-    setCartItems([
-      ...cartItems.filter((item) => item.productId._id !== productId),
-    ]);
+    const updatedCartItems = cartItems.filter(
+      (item) => item.productId._id !== productId
+    );
 
-    const cart = await removeCartItemAPI({ productId, token });
+    setCartItems([...updatedCartItems]);
 
-    setTotalAmount(cart.totalAmount);
-    setTotalAmount(cart.totalAmount);
+    setTotalAmount(calcCartTotalAmount(updatedCartItems));
+
+    await removeCartItemAPI({ productId, token });
   };
 
   return (

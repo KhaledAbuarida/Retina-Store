@@ -74,6 +74,5 @@ export const updateCartItemQuantity = async (
       body: JSON.stringify({ quantity }),
     }
   );
-  console.log(response.status);
   return response;
 };

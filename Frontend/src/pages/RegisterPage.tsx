@@ -55,7 +55,7 @@ const RegisterPage = () => {
     setUsernameError(null);
     const { response } = await registerAPI(data);
 
-    if (!response.token) {
+    if (!response.ok) {
       response.email && setEmailError("Please, try another email");
       response.username && setUsernameError("Please, try another username");
       return;

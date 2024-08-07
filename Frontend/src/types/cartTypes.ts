@@ -2,7 +2,7 @@ import { IProduct } from "./productTypes";
 
 // cart item type
 export interface ICartItem {
-  _id: string;
+  _id?: string;
   productId: IProduct;
   quantity: number;
   unitPrice: number;

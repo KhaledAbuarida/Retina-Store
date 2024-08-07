@@ -63,7 +63,7 @@ export const addCartItem = async ({
 export const removeCartItem = async ({
   userId,
   productId,
-}: deleteItemCartProps): Promise<servicesReturnTypes> => {
+}: deleteItemCartProps) => {
   try {
     const cart = await getCartForUser({ userId });
 
