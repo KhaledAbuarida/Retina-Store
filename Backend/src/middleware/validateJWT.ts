@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import { ExtendedRequest, payloadTypes } from "../types/generalTypes";
 import { userModel } from "../models/userModel";
-import dotenv from "dotenv";
+import dotenv from 'dotenv';
 dotenv.config();
 
 const validateJWT = async (

@@ -38,6 +38,7 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
       return;
     }
 
+    // apply optimistic UI
     const productToAdd: IProduct | undefined = products.find(
       (p: IProduct) => p._id === productId
     );
@@ -47,13 +48,23 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
       return;
     }
 
+    // reshape the product to cartItem to fit the cart (optimistic ui)
     const cartItem: ICartItem = {
       productId: productToAdd,
       quantity: 1,
       unitPrice: productToAdd.price,
     };
 
+    // check if the product existing in cart or not
+    const isExist = cartItems.find(
+      (cartItem) => cartItem.productId._id === productId
+    );
+
+    if (isExist) {
+      return;
+    }
     setCartItems([...cartItems, cartItem]);
+    console.log(cartItem);
 
     const cart = await addCartItemAPI({ token, productId, unitPrice });
 

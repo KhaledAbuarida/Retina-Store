@@ -5,6 +5,7 @@ import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 dotenv.config();
 
+// TODO: doesn't save token and username of the user and should redirect to the home page
 export const register = async ({
   userName,
   firstName,
