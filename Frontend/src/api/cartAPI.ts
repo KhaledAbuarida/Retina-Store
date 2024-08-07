@@ -76,3 +76,22 @@ export const updateCartItemQuantity = async (
   );
   return response;
 };
+
+export const clearCartAPI = async (token: string) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/cart`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application.json",
+        authorization: `Bearer ${token}`,
+      },
+    });
+
+    const data = await response.json();
+
+    // return updated cart
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+};

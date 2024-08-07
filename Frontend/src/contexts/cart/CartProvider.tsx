@@ -3,6 +3,7 @@ import { ICartItem } from "../../types/cartTypes";
 import { cartContext } from "./CartContext";
 import {
   addCartItemAPI,
+  clearCartAPI,
   getCartItemsAPI,
   removeCartItemAPI,
 } from "../../api/cartAPI";
@@ -33,6 +34,7 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
     fetchCartItems();
   }, [token]);
 
+  // add cart item
   const addCartItem = async (productId: string, unitPrice: number) => {
     if (!token) {
       return;
@@ -64,7 +66,6 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
       return;
     }
     setCartItems([...cartItems, cartItem]);
-    console.log(cartItem);
 
     const cart = await addCartItemAPI({ token, productId, unitPrice });
 
@@ -72,6 +73,7 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
     setTotalAmount(cart.totalAmount);
   };
 
+  // remove cart item
   const removeCartItem = async (productId: string) => {
     if (!token) {
       return;
@@ -85,12 +87,28 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
 
     setTotalAmount(calcCartTotalAmount(updatedCartItems));
 
-    await removeCartItemAPI({ productId, token });
+    const updatedCart = await removeCartItemAPI({ productId, token });
+
+    setCartItems([...updatedCart.items]);
+  };
+
+  const clearCart = async () => {
+    if (!token) {
+      return;
+    }
+
+    // apply optimistic ui solution
+    setCartItems([]);
+    setTotalAmount(calcCartTotalAmount(cartItems));
+
+    const updatedCart = await clearCartAPI(token);
+
+    setCartItems(updatedCart.items);
   };
 
   return (
     <cartContext.Provider
-      value={{ cartItems, totalAmount, addCartItem, removeCartItem }}
+      value={{ cartItems, totalAmount, addCartItem, removeCartItem, clearCart }}
     >
       {children}
     </cartContext.Provider>

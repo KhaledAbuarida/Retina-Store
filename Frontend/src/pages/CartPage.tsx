@@ -6,8 +6,15 @@ import NotInterestedIcon from "@mui/icons-material/NotInterested";
 import { ICartItem } from "../types/cartTypes";
 
 export const CartList = () => {
-  const { cartItems, totalAmount } = useCart();
+  // contexts
+  const { cartItems, totalAmount, clearCart } = useCart();
 
+  // handlers
+  const handleClearCart = () => {
+    clearCart();
+  };
+
+  // when cart is empty
   if (cartItems.length === 0) {
     return (
       <Container
@@ -31,7 +38,17 @@ export const CartList = () => {
 
   return (
     <Container sx={{ padding: "20px" }}>
-      <h2>Total Price: ${totalAmount}</h2>
+      <h2>Total Price: $ {totalAmount}</h2>
+
+      <Button
+        sx={{}}
+        color="error"
+        variant="contained"
+        onClick={handleClearCart}
+      >
+        {" "}
+        Clear Cart{" "}
+      </Button>
 
       {cartItems.map((item: ICartItem) => (
         <Box marginTop={2} key={item._id}>
