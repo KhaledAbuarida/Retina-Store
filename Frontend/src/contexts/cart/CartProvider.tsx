@@ -6,6 +6,7 @@ import {
   clearCartAPI,
   getCartItemsAPI,
   removeCartItemAPI,
+  updateCartItemQuantityAPI,
 } from "../../api/cartAPI";
 import { useAuth } from "../Auth/AuthContext";
 import { calcCartTotalAmount } from "../../utils/cartUtils";
@@ -106,9 +107,30 @@ const CartProvider: FC<PropsWithChildren> = ({ children }) => {
     setCartItems(updatedCart.items);
   };
 
+  const changeItemQuantity = async (quantity: number, productId: string) => {
+    if (!token) {
+      return;
+    }
+
+    const updatedCart = await updateCartItemQuantityAPI({
+      productId,
+      quantity,
+      token,
+    });
+    console.log(updatedCart.items);
+    setCartItems([...updatedCart.items]);
+  };
+
   return (
     <cartContext.Provider
-      value={{ cartItems, totalAmount, addCartItem, removeCartItem, clearCart }}
+      value={{
+        cartItems,
+        totalAmount,
+        addCartItem,
+        removeCartItem,
+        clearCart,
+        changeItemQuantity,
+      }}
     >
       {children}
     </cartContext.Provider>

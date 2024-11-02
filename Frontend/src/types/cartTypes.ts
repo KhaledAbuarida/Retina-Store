@@ -33,3 +33,9 @@ export interface removeCartItemAPIParams {
   productId: string;
   token: string;
 }
+
+export interface changeItemQuantityAPIParams {
+  productId: string;
+  quantity: number;
+  token: string;
+}

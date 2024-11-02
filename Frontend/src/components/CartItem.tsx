@@ -17,11 +17,15 @@ export const CartItem = ({ cartItem }: Props) => {
   const { _id, name, price, image, category } = cartItem.productId;
 
   // contexts
-  const { removeCartItem } = useCart();
+  const { removeCartItem, changeItemQuantity } = useCart();
 
   // handlers
   const handleRemoveCartItem = () => {
     removeCartItem(_id);
+  };
+
+  const handleChangeCartItem = (qty: number, productId: string) => {
+    changeItemQuantity(qty, productId);
   };
 
   return (
@@ -50,12 +54,16 @@ export const CartItem = ({ cartItem }: Props) => {
         </Grid>
       </CardContent>
       <CardActions>
-        <IconButton>
+        <IconButton
+          onClick={() => handleChangeCartItem(cartItem.quantity + 1, _id)}
+        >
           <b> + </b>
         </IconButton>
         {cartItem.quantity}
 
-        <IconButton>
+        <IconButton
+          onClick={() => handleChangeCartItem(cartItem.quantity - 1, _id)}
+        >
           <b> - </b>
         </IconButton>
 

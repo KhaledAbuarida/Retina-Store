@@ -23,8 +23,8 @@ mongoose
 
 // ROUTERS
 app.use("/user", userRouter);
-app.use("/products", productRouter);
-app.use("/orders", orderRouter);
+app.use("/product", productRouter);
+app.use("/order", orderRouter);
 app.use("/cart", cartRouter);
 
 app.listen(port, () => {

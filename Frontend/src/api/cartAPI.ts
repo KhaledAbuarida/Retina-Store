@@ -1,6 +1,7 @@
 import { API_BASE_URL } from "../constants/apiBaseUrl";
 import {
   addCartItemAPIParams,
+  changeItemQuantityAPIParams,
   getCartItemsAPIParams,
   removeCartItemAPIParams,
 } from "../types/cartTypes";
@@ -60,21 +61,22 @@ export const removeCartItemAPI = async ({
   return data;
 };
 
-export const updateCartItemQuantity = async (
-  productId: string,
-  quantity: number
-) => {
-  const response = await fetch(
-    `${API_BASE_URL}/cart/quantity/${API_BASE_URL}/${productId}`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ quantity }),
-    }
-  );
-  return response;
+export const updateCartItemQuantityAPI = async ({
+  productId,
+  quantity,
+  token,
+}: changeItemQuantityAPIParams) => {
+  const response = await fetch(`${API_BASE_URL}/cart`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ quantity, productId }),
+  });
+  const data = await response.json();
+
+  return data;
 };
 
 export const clearCartAPI = async (token: string) => {

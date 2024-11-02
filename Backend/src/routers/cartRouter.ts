@@ -11,7 +11,7 @@ import { ExtendedRequest } from "../types/generalTypes";
 
 const router = express.Router();
 
-// POST: --- /cart/add --- new product into the cart
+// POST: --- /cart/add --- add item into the cart
 router.post(
   "/add",
   validateJWT,
@@ -39,7 +39,7 @@ router.post(
   }
 );
 
-// DELETE: --- /cart/items/:productId --- item from user cart
+// DELETE: --- /cart/items/:productId --- delete item from user cart
 router.delete(
   "/items/:productId",
   validateJWT,
@@ -78,7 +78,7 @@ router.delete("/", validateJWT, async (req: ExtendedRequest, res: Response) => {
   }
 });
 
-// GET: --- /cart --- retrieve cart items for user
+// GET: --- /cart --- retrieve all cart items for user
 router.get("/", validateJWT, async (req: ExtendedRequest, res: Response) => {
   const userId = req.user._id;
   try {
@@ -94,7 +94,7 @@ router.get("/", validateJWT, async (req: ExtendedRequest, res: Response) => {
 });
 
 // POST: --- /cart --- update cart item quantity
-router.post("/", validateJWT, async (req: ExtendedRequest, res: Response) => {
+router.put("/", validateJWT, async (req: ExtendedRequest, res: Response) => {
   const { productId, quantity } = req.body;
   const userId = req.user._id;
   try {

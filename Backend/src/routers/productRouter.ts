@@ -5,7 +5,7 @@ import { addNewProduct, getAllProducts } from "../services/productServices";
 const router = express.Router();
 
 // GET: --- /products --- get all products
-router.get("/", async (req: Request, res: Response) => {
+router.get("/items", async (req: Request, res: Response) => {
   try {
     const { data, statusCode } = await getAllProducts();
 
@@ -15,6 +15,7 @@ router.get("/", async (req: Request, res: Response) => {
   }
 });
 
+// TODO: admin only can add products
 // POST: --- /products/add --- add new product
 router.post("/add", async (req: Request, res: Response) => {
   const newProduct: IProduct = req.body;
